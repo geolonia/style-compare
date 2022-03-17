@@ -20,13 +20,19 @@ function App() {
     setCurrentCommit(event.target.value);
   };
 
-  useEffect(async () => {
-    try {
-      const response = await axios.get('https://api.github.com/repos/geoloniamaps/basic/commits?sha=gh-pages&since=2022-01-11T00:00:00Z&per_page=100');
-      setCommits(response.data);
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://api.github.com/repos/geoloniamaps/basic/commits?sha=gh-pages&since=2022-01-11T00:00:00Z&per_page=100');
+        setCommits(response.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
+    
+    fetchData()
+
   }, [])
 
   useEffect(() => {
@@ -50,10 +56,7 @@ function App() {
       zoom: 14
     });
 
-    const map = new geolonia.Compare(beforeMap, afterMap, mapNodeCompare.current, {
-      // Set this to enable comparing two maps by mouse movement:
-      // mousemove: true
-    });
+    new geolonia.Compare(beforeMap, afterMap, mapNodeCompare.current, {});
 
     beforeMap.on('load', () => {
       setBeforeMapObject(beforeMap)
@@ -67,7 +70,7 @@ function App() {
       beforeMapObject.setStyle(`https://raw.githubusercontent.com/geoloniamaps/basic/${currentCommit}/style.json`)
     }
 
-  },[currentCommit])
+  },[beforeMapObject, currentCommit])
 
   return (
     <>
