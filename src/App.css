@@ -1,0 +1,30 @@
+
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+body {
+    overflow: hidden;
+}
+
+body * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.style-version-select-form {
+  position: absolute;
+  z-index: 99;
+  width: calc(50% - 40px);
+  background-color: #ffffff;
+  margin: 20px;
+}
