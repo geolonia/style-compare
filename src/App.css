@@ -14,7 +14,7 @@ body * {
     user-select: none;
 }
 
-.map {
+.map.mapboxgl-map {
     position: absolute;
     top: 0;
     bottom: 0;
