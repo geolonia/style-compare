@@ -84,10 +84,10 @@ function App() {
           margin: "20px"
         }}
       >
-        <InputLabel id="commit-select-label">スタイル更新履歴</InputLabel>
+        <InputLabel id="demo-simple-select-label">スタイル更新履歴</InputLabel>
         <Select
-          labelId="commit-select-label"
-          id="commit-select"
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
           value={currentCommit}
           label="スタイル更新履歴"
           onChange={handleChange}
@@ -109,7 +109,7 @@ function App() {
           fontSize: "16px",
           border: "1px solid rgb(133, 133, 133)"
         }}
-      >{`最新版 ver.${commits.length}`}</div>
+      >最新版</div>
       <div ref={mapNodeCompare} id="comparison-container">
         <div ref={mapNodeBefore} id="before" className="map"></div>
         <div ref={mapNodeAfter} id="after" className="map"></div>
