@@ -153,9 +153,6 @@ function App() {
             })}
           </Select>
         </FormControl>
-        {
-          console.log(commitUrl)
-        }
         <a
           href={commitUrl}
           target='_blank'
@@ -193,7 +190,16 @@ function App() {
           fontSize: "16px",
           border: "1px solid rgb(133, 133, 133)"
         }}
-      >最新版</div>
+      >
+        <label
+          className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          style={{
+            backgroundColor: "#ffffff"
+          }}
+        >最新版</label>
+        {commits && new Date(commits[commits.length - 1].commit.committer.date).toLocaleString('ja-JP')}
+      </div>
       <div ref={mapNodeCompare} id="comparison-container">
         <div ref={mapNodeBefore} id="before" className="map"></div>
         <div ref={mapNodeAfter} id="after" className="map"></div>
