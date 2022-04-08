@@ -21,12 +21,15 @@ function App() {
   const [currentCommit, setCurrentCommit] = React.useState(commitQuery ? commitQuery : '');
   const [beforeMapObject, setBeforeMapObject] = React.useState(null)
   const [commitUrl, setCommitUrl] = React.useState('');
+  const [commitDate, setCommitDate] = React.useState(null);
+
 
   useEffect(() => {
     if (commitQuery && commits) {
       setCurrentCommit(commitQuery);
       const thisCommit = commits.find(commit => commit.sha === commitQuery);
       setCommitUrl(thisCommit.html_url);
+      setCommitDate(thisCommit.commit.committer.date);
     }
   },[commitQuery, commits])
 
@@ -37,6 +40,7 @@ function App() {
 
     setCommitUrl(thisCommit.html_url);
     setCurrentCommit(event.target.value);
+    setCommitDate(thisCommit.commit.committer.date);
 
     url.searchParams.delete('commit');
     url.searchParams.append('commit', event.target.value);
@@ -102,7 +106,7 @@ function App() {
           position: "absolute",
           margin: "20px",
           height: " 60px",
-          width: "430px"
+          width: "580px"
         }}
       >
         <FormControl
@@ -159,7 +163,7 @@ function App() {
           style={{
             position: "absolute",
             zIndex: 2,
-            right: 0,
+            right: "160px",
             top: "7px",
             backgroundColor: "#ffffff",
             padding: "10px"
@@ -174,6 +178,30 @@ function App() {
             }}
           >
             <span style={{ fontSize: "12px" }}>このコミットを見る</span><IosShare />
+          </IconButton>
+        </a>
+        <a
+          href={commitDate && `https://github.com/geoloniamaps/basic/pulls?q=merged%3A${commitDate.slice(0, 10)}`}
+          target='_blank'
+          rel="noopener noreferrer"
+          style={{
+            position: "absolute",
+            zIndex: 2,
+            right: 0,
+            top: "7px",
+            backgroundColor: "#ffffff",
+            padding: "10px"
+          }}
+        >
+          <IconButton
+            color="primary"
+            style={{
+              fontSize: "20px",
+              margin: "0",
+              padding: "0",
+            }}
+          >
+            <span style={{ fontSize: "12px" }}>関連するPRを見る</span><IosShare />
           </IconButton>
         </a>
       </div>
