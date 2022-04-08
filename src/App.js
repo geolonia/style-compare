@@ -23,7 +23,7 @@ function App() {
   const [commitUrl, setCommitUrl] = React.useState('');
 
   useEffect(() => {
-    if (commitQuery, commits) {
+    if (commitQuery && commits) {
       setCurrentCommit(commitQuery);
       const thisCommit = commits.find(commit => commit.sha === commitQuery);
       setCommitUrl(thisCommit.html_url);
@@ -34,8 +34,6 @@ function App() {
   const handleChange = (event) => {
 
     const thisCommit = commits.find(commit => commit.sha === event.target.value);
-
-    console.log(thisCommit);
 
     setCommitUrl(thisCommit.html_url);
     setCurrentCommit(event.target.value);
@@ -125,6 +123,7 @@ function App() {
             onChange={handleChange}
           >
             {commits && commits.map((commit, i) => {
+              
               return (
                 <MenuItem
                   key={commit.sha}
@@ -145,7 +144,7 @@ function App() {
                         marginRight: "15px"
                       }}
                     >
-                      {`ver.${commits.length - i}: ${new Date(commit.commit.committer.date).toLocaleString('ja-JP')}`}
+                      {`ver.${commits.length - (i+1)}: ${new Date(commit.commit.committer.date).toLocaleString('ja-JP')}`}
                     </p>
                   </div>
                 </MenuItem>
@@ -198,7 +197,7 @@ function App() {
             backgroundColor: "#ffffff"
           }}
         >最新版</label>
-        {commits && new Date(commits[commits.length - 1].commit.committer.date).toLocaleString('ja-JP')}
+        {commits && `ver.${commits.length -1}: ${new Date(commits[0].commit.committer.date).toLocaleString('ja-JP')}`}
       </div>
       <div ref={mapNodeCompare} id="comparison-container">
         <div ref={mapNodeBefore} id="before" className="map"></div>
