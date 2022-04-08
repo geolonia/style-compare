@@ -6,17 +6,28 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import IconButton from '@mui/material/IconButton';
+import { IosShare } from '@mui/icons-material';
+import Button from '@mui/material/Button';
+import { padding } from '@mui/system';
 
 function App() {
+
+  // https://github.com/geoloniamaps/basic/pulls?q=merged%3A2022-02-09
+  // https://github.com/geoloniamaps/basic/search?q=committer-date%3A2022-03-01&type=Commits
 
   const mapNodeBefore = useRef(null);
   const mapNodeAfter = useRef(null);
   const mapNodeCompare = useRef(null);
   const [commits, setCommits] = useState(null);
   const [currentCommit, setCurrentCommit] = React.useState('');
-  const [ beforeMapObject, setBeforeMapObject ] = React.useState(null)
+  const [beforeMapObject, setBeforeMapObject] = React.useState(null)
+  const [commitUrl, setCommitUrl] = React.useState('');
 
   const handleChange = (event) => {
+
+    const thisCommit = commits.find(commit => commit.sha === event.target.value);
+    setCommitUrl(thisCommit.html_url);
     setCurrentCommit(event.target.value);
   };
 
@@ -30,7 +41,7 @@ function App() {
         console.error(error);
       }
     }
-    
+
     fetchData()
 
   }, [])
@@ -70,37 +81,93 @@ function App() {
       beforeMapObject.setStyle(`https://raw.githubusercontent.com/geoloniamaps/basic/${currentCommit}/style.json`)
     }
 
-  },[beforeMapObject, currentCommit])
+  }, [beforeMapObject, currentCommit])
 
   return (
     <>
-      <FormControl
-        fullWidth
-        style={{
-          position: "absolute",
-          zIndex: 2,
-          width: "230px",
-          backgroundColor: "#ffffff",
-          margin: "20px"
-        }}
-      >
-        <InputLabel id="demo-simple-select-label">スタイル更新履歴</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={currentCommit}
-          label="スタイル更新履歴"
-          onChange={handleChange}
-        >
-          {commits && commits.map((commit, i) => {
-            return <MenuItem key={commit.sha} value={commit.sha}>{`ver.${commits.length - i }: ${new Date(commit.commit.committer.date).toLocaleString('ja-JP')}`}</MenuItem>
-          })}
-        </Select>
-      </FormControl>
       <div
         style={{
           position: "absolute",
-          right:" 50px",
+          margin: "20px",
+          height: " 60px",
+          width: "430px"
+        }}
+      >
+        <FormControl
+          fullWidth
+          style={{
+            position: "absolute",
+            zIndex: 2,
+            width: "250px",
+            backgroundColor: "#ffffff",
+          }}
+        >
+          <InputLabel id="style-select-label">スタイル更新履歴</InputLabel>
+          <Select
+            labelId="style-select-label"
+            id="style-select"
+            value={currentCommit}
+            label="スタイル更新履歴"
+            onChange={handleChange}
+          >
+            {commits && commits.map((commit, i) => {
+              return (
+                <MenuItem
+                  key={commit.sha}
+                  value={commit.sha}
+                  style={{
+                    padding: "20px 20px"
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "end"
+                    }}
+                  >
+                    <p
+                      style={{
+                        margin: "0",
+                        marginRight: "15px"
+                      }}
+                    >
+                      {`ver.${commits.length - i}: ${new Date(commit.commit.committer.date).toLocaleString('ja-JP')}`}
+                    </p>
+                  </div>
+                </MenuItem>
+              )
+            })}
+          </Select>
+        </FormControl>
+        <a
+          href={commitUrl}
+          target='_blank'
+          rel="noopener noreferrer"
+          style={{
+            position: "absolute",
+            zIndex: 2,
+            right: 0,
+            top: "7px",
+            backgroundColor: "#ffffff",
+            padding: "10px"
+          }}
+        >
+          <IconButton
+            color="primary"
+            style={{
+              fontSize: "20px",
+              margin: "0",
+              padding: "0",
+            }}
+          >
+            <span style={{ fontSize: "12px" }}>このコミットを見る</span><IosShare />
+          </IconButton>
+        </a>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          right: " 50px",
           zIndex: 2,
           width: "230px",
           backgroundColor: "rgb(255, 255, 255)",

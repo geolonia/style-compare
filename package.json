@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.0",
     "@mui/material": "^5.5.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
@@ -15,7 +16,7 @@
     "react-scripts": "5.0.0",
     "web-vitals": "^2.1.4"
   },
-  "homepage" : "https://geolonia.github.io/style-compare",
+  "homepage": "https://geolonia.github.io/style-compare",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
