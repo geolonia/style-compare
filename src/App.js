@@ -8,27 +8,41 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import IconButton from '@mui/material/IconButton';
 import { IosShare } from '@mui/icons-material';
-import Button from '@mui/material/Button';
-import { padding } from '@mui/system';
 
 function App() {
 
-  // https://github.com/geoloniamaps/basic/pulls?q=merged%3A2022-02-09
-  // https://github.com/geoloniamaps/basic/search?q=committer-date%3A2022-03-01&type=Commits
+  let url = new URL(window.location.href);
+  const commitQuery = url.searchParams.get('commit');
 
   const mapNodeBefore = useRef(null);
   const mapNodeAfter = useRef(null);
   const mapNodeCompare = useRef(null);
   const [commits, setCommits] = useState(null);
-  const [currentCommit, setCurrentCommit] = React.useState('');
+  const [currentCommit, setCurrentCommit] = React.useState(commitQuery ? commitQuery : '');
   const [beforeMapObject, setBeforeMapObject] = React.useState(null)
   const [commitUrl, setCommitUrl] = React.useState('');
+
+  useEffect(() => {
+    if (commitQuery, commits) {
+      setCurrentCommit(commitQuery);
+      const thisCommit = commits.find(commit => commit.sha === commitQuery);
+      setCommitUrl(thisCommit.html_url);
+    }
+  },[commitQuery, commits])
+
 
   const handleChange = (event) => {
 
     const thisCommit = commits.find(commit => commit.sha === event.target.value);
+
+    console.log(thisCommit);
+
     setCommitUrl(thisCommit.html_url);
     setCurrentCommit(event.target.value);
+
+    url.searchParams.delete('commit');
+    url.searchParams.append('commit', event.target.value);
+    window.location.href = url;
   };
 
   useEffect(() => {
@@ -139,6 +153,9 @@ function App() {
             })}
           </Select>
         </FormControl>
+        {
+          console.log(commitUrl)
+        }
         <a
           href={commitUrl}
           target='_blank'
