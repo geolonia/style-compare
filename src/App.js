@@ -215,11 +215,12 @@ function App() {
           margin: "20px",
           padding: "16.5px 14px",
           fontSize: "16px",
-          border: "1px solid rgb(133, 133, 133)"
+          border: "1px solid rgba(0, 0, 0, 0.23)",
+          borderRadius: "4px",
         }}
       >
         <label
-          className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+          className="label-title"
           data-shrink="true"
           style={{
             backgroundColor: "#ffffff"

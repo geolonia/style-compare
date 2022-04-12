@@ -1,6 +1,14 @@
+body {
+    margin: 0;
+    padding: 0;
+}
 
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
 
 body {
     overflow: hidden;
@@ -22,9 +30,27 @@ body * {
 }
 
 .style-version-select-form {
-  position: absolute;
-  z-index: 99;
-  width: calc(50% - 40px);
-  background-color: #ffffff;
-  margin: 20px;
+    position: absolute;
+    z-index: 99;
+    width: calc(50% - 40px);
+    background-color: #ffffff;
+    margin: 20px;
+}
+
+.label-title {
+    color: rgba(0, 0, 0, 0.6);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.4375em;
+    padding: 0px;
+    display: block;
+    max-width: calc(133% - 24px);
+    position: absolute;
+    left: 0px;
+    top: -2px;
+    transform: translate(14px, -9px) scale(0.75);
+    z-index: 1;
+    pointer-events: auto;
+    user-select: none;
 }
