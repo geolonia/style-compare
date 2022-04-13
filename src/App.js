@@ -101,6 +101,9 @@ function App() {
 
   return (
     <>
+      <div className="style-compare-overlay-container">
+        <div className="style-compare-overlay"></div>
+      </div>
       <div
         style={{
           position: "absolute",
