@@ -8,7 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { IosShare, Crop } from '@mui/icons-material';
+import { IosShare, Crop, PhotoCamera } from '@mui/icons-material';
 import logo from './logo.svg';
 
 
@@ -119,6 +119,15 @@ function App() {
             }}
           >
             画像書き出しガイドを表示
+          </Button>
+          <Button
+            variant={displayOverlay ? "contained" : "outlined"}
+            endIcon={<PhotoCamera />}
+            disabled={!displayOverlay}
+            onClick={() => {
+            }}
+          >
+            画像書き出し
           </Button>
         </div>
       </div>

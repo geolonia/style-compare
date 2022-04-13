@@ -95,3 +95,8 @@ h1 {
     font-weight: 400;
     margin: 5px;
 }
+
+.header-utils > button
+{
+    margin-left: 5px;
+}
