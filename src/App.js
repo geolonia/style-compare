@@ -6,8 +6,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { IosShare } from '@mui/icons-material';
+import { IosShare, Crop } from '@mui/icons-material';
+import logo from './logo.svg';
+
 
 function App() {
 
@@ -22,6 +25,7 @@ function App() {
   const [beforeMapObject, setBeforeMapObject] = React.useState(null)
   const [commitUrl, setCommitUrl] = React.useState('');
   const [commitDate, setCommitDate] = React.useState(null);
+  const [displayOverlay, setDisplayOverlay] = React.useState(false);
 
 
   useEffect(() => {
@@ -101,6 +105,29 @@ function App() {
 
   return (
     <>
+      <div className='header'>
+        <div className='brand'>
+          <img id="logo" src={logo} alt='Geolonia' />
+          <h1>Style Compare</h1>
+        </div>
+        <div className='header-utils'>
+          <Button
+            variant={displayOverlay ? "contained" : "outlined"}
+            endIcon={<Crop />}
+            onClick={() => {
+              setDisplayOverlay(!displayOverlay)
+            }}
+          >
+            画像書き出しガイドを表示
+          </Button>
+        </div>
+      </div>
+      {
+        displayOverlay && 
+        <div className="style-compare-overlay-container">
+          <div className="style-compare-overlay"></div>
+        </div>
+      }
       <div
         style={{
           position: "absolute",
